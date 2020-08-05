@@ -9,8 +9,9 @@ RUN conda env create -f conda.yml
 # Make RUN commands use the new environment:
 SHELL ["conda", "run", "-n", "aiap-food-classifier", "/bin/bash", "-c"]
 
-# COPY model weights
+# COPY model weights and Procfile
 COPY tensorfood.h5 .
+COPY Procfile .
 
 # COPY everything in src folder
 COPY src/. .

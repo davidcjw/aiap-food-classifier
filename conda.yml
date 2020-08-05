@@ -15,3 +15,4 @@ dependencies:
     - pillow==6.2.0
     - tensorflow==2.0.0
     - flask-markdown==0.3
+    - gunicorn==20.0.4

@@ -7,7 +7,7 @@ from flask import Flask, render_template, url_for, request, jsonify
 from flaskext.markdown import Markdown
 from flask import send_from_directory
 from waitress import serve
-from inference import Inference
+from src.inference import Inference
 
 # Add logger steps
 logger = logging.getLogger(__name__)
@@ -116,6 +116,6 @@ def send_image(filename):
 
 
 if __name__ == "__main__":
-    # app.run(host="0.0.0.0", debug=True, port=8000)
+    app.run(host="0.0.0.0", debug=True, port=8000)
     # For production mode, comment the line above and uncomment below
-    serve(app, host="0.0.0.0", port=8000)
+    # serve(app, host="0.0.0.0", port=8000)
