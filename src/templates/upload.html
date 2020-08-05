@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>AIAP Batch 5 Assignment 7</title>
+{% endblock %}
+
+{% block body %}
+<div class='content'>
+	<h1 style="text-align: center">Predicting Food Classes</h1>
+
+    <div class="description">
+        <h3>About the model</h3>
+        <p>
+            This model is trained using the ResNet50 architecture using 
+            ImageNet weights, fine-tuned on the last 3 layers and adding a
+            Dense layer containing 512 nodes, followed by an output layer.
+        </p>
+        <p>
+            We used the Adam optimiser with a learning rate of 0.001 and 
+            trained for 20 epochs with an EarlyStopping patience of 3. The 
+            validation accuracy we achieved at the end of training was 70%.
+        </p>
+        <p>
+            The model is able to handle both <i>.jpeg</i> and <i>.png</i>
+             files.
+        </p>
+        
+        <form action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <h3>You are about to classify these images:</h3>
+                <img src="{{ url_for('send_image', filename=image_name) }}">
+                <br><br>
+                I am {{ proba }}% sure that this is a {{ pred }}!
+            </div>
+        </form>
+
+    </div>
+
+</div>
+{% endblock %}

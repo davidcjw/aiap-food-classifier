@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<div class="header">
+    <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+        <a class="pure-menu-heading" href="https://www.aisingapore.org/">AISG</a>
+
+        <ul class="pure-menu-list">
+            <li class="pure-menu-item"><a href="#" class="pure-menu-link">Home</a></li>
+            <li class="pure-menu-item"><a href="/docs" class="pure-menu-link">Documentation</a></li>
+            <li class="pure-menu-item"><a href="https://www.youtube.com/watch?v=tq76OR6aTZY" class="pure-menu-link">
+                <i class="far fa-futbol"></i> Foosball</a>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="splash-container">
+    <div class="splash">
+        <h1 class="splash-head">Tensorfood</h1>
+        <p class="splash-subhead">
+            This web app is created as part of AIAP Batch 5 Assignment 7.
+        </p>
+        <p>
+            <a class="pure-button pure-button-primary">Scroll down</a>
+        </p>
+    </div>
+</div>
+
+<div class="content-wrapper">
+    <div class="content">
+        <h2 class="content-head is-center">Model Specifications</h2>
+
+        <div class="pure-g">
+            <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+
+                <h3 class="content-subhead">
+                    <i class="fa fa-rocket"></i>
+                    Architecture
+                </h3>
+                <p class="content-subsubhead">
+                    The base architecture used was a ResNet50 with a Dense layer
+                    included at the end with 512 nodes, followed by a Dropout layer
+                    of 0.2. Following which, an output layer with 12 nodes was added
+                    to account for each of the twelve classes.
+                </p>
+            </div>
+            <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+                <h3 class="content-subhead">
+                    <i class="fas fa-chart-line"></i>
+                    Optimizer
+                </h3>
+                <p class="content-subsubhead">
+                    The Adam optimzer was used, with a learning rate a 1e-3 and decay
+                    of 1e-6. The model was then compiled using a categorical cross-entropy
+                    loss.
+                </p>
+            </div>
+            <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+                <h3 class="content-subhead">
+                    <i class="fas fa-dumbbell"></i>
+                    Training
+                </h3>
+                <p class="content-subsubhead">
+                    The model was trained in 20 epochs with ~800 images of 12 different
+                    classes. Early stopping on validation loss was used with a patience of 3.
+                </p>
+            </div>
+            <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+                <h3 class="content-subhead">
+                    <i class="fa fa-check-square-o"></i>
+                    Results
+                </h3>
+                <p class="content-subsubhead">
+                    The model achieved a validation accuracy of 70%, with an estimated
+                    training time of 20 minutes.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="ribbon l-box-lrg pure-g" id="app">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-3-5">
+            <h2 class="content-head content-head-ribbon">
+                <i class="fas fa-drumstick-bite"></i> image classifier
+            </h2>
+            <p class="content-subsubhead">
+                Select up to 3 image(s) to classify.<br>
+                The model is able to handle <i>.jpeg</i>, <i>.jpg</i> and <i>.png</i> files.
+                <hr>
+            </p>
+            <div class="row">
+                <div class="content-subsubhead">
+                    <img v-if="imageURL" :src="imageURL" class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+                    <img v-if="imageURL1" :src="imageURL1" class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+                    <img v-if="imageURL2" :src="imageURL2" class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+                    <input type="file" ref="file" @change="onFileChanged" multiple>
+                    <br><br>
+                    <button @click="onUpload" v-if="imageURL && !results" class="pure-button pure-button-primary">Classify</button>
+                    <p v-if="imageURL && !results"><strong>Note:</strong> 
+                        Prediction will take some time if model is loaded
+                        for the first time.
+                    </p>
+                </div>
+                <div v-if="results" class="content-subsubhead" >
+                    <h3 class="content-head content-head-ribbon">Prediction</h3>
+                    <p v-for="(food, proba) in results">I think it is a <span class="highlight" v-html="food.food.replace(/_/g,' ')"></span>
+                    with <span class="highlight" v-html="food.probability"></span> probability!
+                    </p>
+                </div>
+                <div v-if="errorMessage" class="col-6">
+                    <h3>Error</h3>
+                    <p><span v-html="errorMessage"></span>!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer of the page -->
+    <div class="footer l-box is-center">
+        Created by David, with the help of Pure-CSS
+    </div>
+
+</div>
+
+{% endblock %}

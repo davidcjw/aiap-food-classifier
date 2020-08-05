@@ -1,0 +1,17 @@
+name: aiap-food-classifier
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python==3.6.7
+  - pip==19.0.3
+  - scikit-learn==0.22.1
+  - pandas==1.0.1
+  - numpy==1.18.1
+  - scipy==1.4.1
+  - flask==1.1.1
+  - waitress==1.4.3
+  - pip:
+    - pillow==6.2.0
+    - tensorflow==2.0.0
+    - flask-markdown==0.3

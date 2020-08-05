@@ -1,3 +1,7 @@
+{% extends "base.html" %}
+{% block body %}
+{% filter markdown %}
+
 # AIAP Batch 5 Assignment 7
 
 This project is done as part of AIAP assignment 7. This is a front-to-end
@@ -26,7 +30,7 @@ Below table provides a summary of other specifications:
 |Learning Rate (Decay)|1e-3 (1e-6)
 |Batch Size|32
 |Train-Test-Split %|80-10-10
-|Image Dimensions|224 x 224 x 3
+|Image Dimensions|224 x 224 x 
 
 ### Preprocessing and Training
 
@@ -42,21 +46,19 @@ that were performed:
 ```
 self.shape = 224
 self.batchsize = 32
-train_datagen = ImageDataGenerator(
-    rotation_range=15,
-    width_shift_range=0.1,
-    height_shift_range=0.1,
-    horizontal_flip=True)
+train_datagen = ImageDataGenerator(rotation_range=15,
+								   width_shift_range=0.1,
+							   	   height_shift_range=0.1,
+								   horizontal_flip=True)
                 
-train_generator = train_datagen.flow_from_directory(
-    self.directory + 'output/train/',
-    target_size=(self.shape, self.shape),
-    batch_size=self.batchsize,
-    class_mode='categorical')
+train_generator = train_datagen.flow_from_directory(self.directory + 'output/train/',
+									                target_size=(self.shape, self.shape),
+										            batch_size=self.batchsize,
+									                class_mode='categorical')
 ```
 > **Note**: Augmentation is only done on the train set
 
-2. **Building the model**
+2. Building the model
 
 The model is built on top of ResNet50 and fine-tuned on the last 3 layers,
 with an additional Dense layer at the end together with a Dropout layer.
@@ -77,7 +79,7 @@ x = Dense(12, activation='softmax')(x)
 model = tf.keras.Model(inputs=model.inputs, outputs=x)
 ```
 
-3. **Training the model**
+3. Training the model
 
 We use the Adam optimizer together with a categorical cross-entropy loss
 function when we compile our model. We then fit the model on our images over
@@ -241,3 +243,6 @@ David Chong
 [2]: https://pypi.org/project/Flask/
 [3]: https://pillow.readthedocs.io/en/stable/installation.html
 [4]: https://docs.pytest.org/en/latest/getting-started.html
+
+{% endfilter %}
+{% endblock %}

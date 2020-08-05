@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Title icon -->
+    <title>David's Food Predictor</title>
+    <link rel="shortcut icon" href="/static/assets/favicon-16x16.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Baloo + Open Sans font from GFonts -->
+    <link href="https://fonts.googleapis.com/css?family=Baloo+2|Inconsolata:700&display=swap" rel="stylesheet">
+    
+    <!-- Pure css cdn -->
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/grids-responsive-min.css">
+    
+    <!-- Cdns for Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+    <!-- Main css file -->
+    <link rel="stylesheet" href="../static/css/main.css">
+
+    <!-- CDN to fontawesome -->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <script src="https://kit.fontawesome.com/76b2b49413.js" crossorigin="anonymous"></script>
+
+    {% block head %}
+    {% endblock %}
+</head>
+
+<body>
+
+{% block body %}
+{% endblock %}
+
+<!-- Javascript -->
+<script>
+    var app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                selectedFile: null,
+                imageURL: null,
+                imageURL1: null,
+                imageURL2: null,
+                results: "",
+                errorMessage: ""
+            }
+        },
+        methods: {
+            onFileChanged(event) {
+                this.selectedFile = event.target.files;
+                this.imageURL = URL.createObjectURL(this.selectedFile[0]);
+                this.imageURL1 = URL.createObjectURL(this.selectedFile[1]);
+                this.imageURL2 = URL.createObjectURL(this.selectedFile[2]);
+                this.results = "";
+            },
+            onUpload() {
+                let vm = this;
+                const formData = new FormData()
+
+                // take in multiple files
+                for (var i = 0; i < this.$refs.file.files.length; i++) {
+                    let file = this.$refs.file.files[i];
+                    console.log(file);
+                    formData.append('file'+i, file);
+                }
+                axios.post('predict', formData)
+                    .then(function (response) {
+                        vm.results = response.data;
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        vm.errorMessage = error.response.data.error_message;
+                        console.log(error.response.data);
+                    });
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
