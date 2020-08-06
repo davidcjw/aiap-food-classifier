@@ -3,8 +3,9 @@
 This project is done as part of AIAP assignment 7. This is a front-to-end
 project, where the end goal is to serve a deep learning model on the web.
 In this web app, a trained model is used to predict 12 different food classes,
-namely chilli crab, curry_puff, dim sum, ice kacang, kaya toast, nasi ayam, 
-popiah, roti prata, sambal stingray, satay, tau huay and wanton noodle. 
+namely `chilli crab`, `curry puff`, `dim sum`, `ice kacang`, `kaya toast`, 
+`nasi ayam`, `popiah`, `roti prata`, `sambal stingray`, `satay`, `tau huay`
+and `wanton noodle`. 
 
 This app is deployed at this [link][5].
 
