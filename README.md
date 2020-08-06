@@ -6,7 +6,7 @@ In this web app, a trained model is used to predict 12 different food classes,
 namely chilli crab, curry_puff, dim sum, ice kacang, kaya toast, nasi ayam, 
 popiah, roti prata, sambal stingray, satay, tau huay and wanton noodle. 
 
-This app is deployed at this (link)[5].
+This app is deployed at this [link][5].
 
 ## Architecture of Model
 
