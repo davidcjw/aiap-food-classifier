@@ -6,6 +6,8 @@ In this web app, a trained model is used to predict 12 different food classes,
 namely chilli crab, curry_puff, dim sum, ice kacang, kaya toast, nasi ayam, 
 popiah, roti prata, sambal stingray, satay, tau huay and wanton noodle. 
 
+This app is deployed at this (link)[5].
+
 ## Architecture of Model
 
 The base architecture is a ResNet50 model, followed by a Dense layer of 512 
@@ -241,3 +243,4 @@ David Chong
 [2]: https://pypi.org/project/Flask/
 [3]: https://pillow.readthedocs.io/en/stable/installation.html
 [4]: https://docs.pytest.org/en/latest/getting-started.html
+[5]: https://aiap-food-classifier.herokuapp.com/

@@ -11,7 +11,6 @@ SHELL ["conda", "run", "-n", "aiap-food-classifier", "/bin/bash", "-c"]
 
 # COPY model weights and Procfile
 COPY tensorfood.h5 .
-COPY Procfile .
 
 # COPY everything in src folder
 COPY src/. .
