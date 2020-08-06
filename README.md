@@ -152,36 +152,9 @@ the browser or type localhost:8000 in the url. S
 
 Simply upload an image and select the ``Classify`` button to get a prediction!
 
-
-## Running unit tests
-
-We will be using pytest to run unit tests for our project. To install, please
-follow this [link][4] to their installation documentation.
-
-Unit tests are used to test the validity of our code. From the main project 
-directory, run:
-
-```
-pytest
-```
-
-to execute the unit tests. Pytest will automatically scan the tests folder
-and execute the functions in test_inference.py.
-
-### Breaking down each unit test
-
-Testing image shape: Our model runs on 224x224x3 images and by default, we have
-functions to handle images that are not in these format. The following tests
-whether or not the images have been successfully handled to fit that format.
-
-```
-SHAPE = 224
-assert inf._resize_image(Image.open(TEST_IMG)).shape == (SHAPE, SHAPE, 3)
-```
-
 ## Deployment
 
-Our model is deployed on a Docker container and hosted on AISG's cluster. 
+Our model is deployed on a Docker container and hosted on Heroku.
 
 The web application is created using Flask, together with Pure-CSS as the
 CSS template and Vue.js as the Javascript framework.
@@ -202,39 +175,6 @@ The folder structure is as such:
 Before using this code for deployment, please ensure that this runs on your
 local machine first. You should attempt to build a Docker Image and run that
 image locally before deploying it.
-
-## What is CI/CD
-
-``CI/CD`` stands for continuous integration and continuous development. In short, it allows DevOps teams to increase the speed of software development in a quicker and more consistent manner.
-
-**TLDR:**
-Continuous integration comes about when we integrate code in a shared repository, which will be validated when developers perform a **Merge** request
-> Validation is done through a pipeline trigger, which will build, test and validate the quality of the developer's code. Upon validation, changes will then be made to the repository.
-
-Continuous delivery is a result of having *continuous integration*
-> Note that continuous delivery does not equate to automatic deployment. It simply means having the ability or option to deploy as a result of CI-validated code.
-
-### CICD Workflow
-
-```mermaid
-graph LR
-A((Developer)) -- Push code changes --> B[Build/Test]
-B -- Failed tests --> A
-B -- Push code fixes --> C[Build/Test]
-C --> D(Review and Approve)
-D --> E{Merge}
-A --> E
-E --> F(Automated Build Test Deploy)
-```
-
-```mermaid
-sequenceDiagram
-Developer ->> Build/Test: Continuous Integration
-Build/Test--x Developer: Failed Tests
-Note left of Review and Approve: CI is the process of <br>continually pushing <br> and reviewing <br>code
-Note right of Merge: CD is the ability to <br> push out code as a<br> result of CI
-Merge -->> Deploy: Continous Delivery
-```
 
 ## Authors
 
